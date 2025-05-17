@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lihyanite Name Converter</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #8e6e53, #d9b88f); /* Brown desert-inspired gradient */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1.2em;
+      width: 300px;
+      text-align: center;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #f2e6d9;
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      background-color: #c2a076;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #a07c56;
+    }
+
+    #output {
+      margin-top: 30px;
+      font-size: 3em;
+      font-family: 'Courier New', monospace;
+      color: #e5d1a1;
+      text-shadow: 1px 1px 0 #333, 2px 2px 5px #000;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lihyanite Name Converter</h1>
+  <input type="text" id="nameInput" placeholder="Enter your name in English">
+  <button onclick="convertName()">Convert</button>
+  <div id="output"></div>
+
+  <script>
+    const lihyaniteMap = {
+      "a": "𐪑",
+      "b": "𐪈",
+      "d": "𐪕",
+      "h": "𐪀",
+      "l": "𐪁",
+      "m": "𐪃",
+      "n": "𐪌",
+      "r": "𐪇",
+      "s": "𐪊",
+      "t": "𐪉",
+      "y": "𐪚",
+      "z": "𐪒",
+      "k": "𐪄",
+      "f": "𐪆",
+      "g": "𐪅",
+      "w": "𐪖",
+      "e": "𐪓",
+      "i": "𐪔"
+    };
+
+    function convertName() {
+      const input = document.getElementById('nameInput').value.toLowerCase();
+      let output = '';
+      for (let char of input) {
+        output += lihyaniteMap[char] || char;
+      }
+      document.getElementById('output').textContent = output;
+    }
+  </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
