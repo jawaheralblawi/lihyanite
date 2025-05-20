@@ -11,106 +11,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Lihyanite Name Converter</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #8e6e53, #d9b88f); /* Brown desert-inspired gradient */
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 2px 2px 4px #000;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lihyanite Name Converter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 10px 20px;
-      border-radius: 10px;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 1.2em;
-      width: 300px;
-      text-align: center;
-      margin-bottom: 10px;
-      border: none;
-      border-radius: 4px;
-      background-color: #f2e6d9;
-      color: #333;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 1.1em;
-      background-color: #c2a076;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      color: white;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #a07c56;
-    }
-
-    #output {
-      margin-top: 30px;
-      font-size: 3em;
-      font-family: 'Courier New', monospace;
-      color: #e5d1a1;
-      text-shadow: 1px 1px 0 #333, 2px 2px 5px #000;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      border-radius: 10px;
-    }
-  </style>
+        body {
+            margin: 0;
+            font-family: 'Roboto Slab', serif;
+            background: url('https://i.imgur.com/Bp8Oyoq.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f5f0e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        main {
+            background: rgba(50, 20, 0, 0.85);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 0 15px #ddb67c;
+        }
+        input, button {
+            font-size: 1.2rem;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+            text-align: center;
+        }
+        button {
+            background-color: #ddb67c;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #bf8e3c;
+        }
+        #convertedNameContainer {
+            font-size: 2rem;
+            color: #ddb67c;
+            margin-top: 1.5rem;
+        }
+    </style>
 </head>
 <body>
-  <h1>Lihyanite Name Converter</h1>
-  <input type="text" id="nameInput" placeholder="Enter your name in English">
-  <button onclick="convertName()">Convert</button>
-  <div id="output"></div>
 
-  <script>
-    const lihyaniteMap = {
-      "a": "𐪑",
-      "b": "𐪈",
-      "d": "𐪕",
-      "h": "𐪀",
-      "l": "𐪁",
-      "m": "𐪃",
-      "n": "𐪌",
-      "r": "𐪇",
-      "s": "𐪊",
-      "t": "𐪉",
-      "y": "𐪚",
-      "z": "𐪒",
-      "k": "𐪄",
-      "f": "𐪆",
-      "g": "𐪅",
-      "w": "𐪖",
-      "e": "𐪓",
-      "i": "𐪔"
+<header>
+    <h1>Lihyanite Name Converter</h1>
+    <p>Enter your name below to see it transformed into the ancient Lihyanite script!</p>
+</header>
+
+<main>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="convertName()">Convert</button>
+    <div id="convertedNameContainer"></div>
+
+    <div id="shareDownloadContainer" style="display:none;">
+        <button id="downloadBtn">Download Image</button>
+        <button id="twitterShareBtn">Share on Twitter</button>
+        <button id="linkedinShareBtn">Share on LinkedIn</button>
+    </div>
+</main>
+
+<script>
+    const lihyanMap = {
+        'A': '𐩠', 'B': '𐩡', 'C': '𐩢', 'D': '𐩣', 'E': '𐩤',
+        'F': '𐩥', 'G': '𐩦', 'H': '𐩧', 'I': '𐩨', 'J': '𐩩',
+        'K': '𐩪', 'L': '𐩫', 'M': '𐩬', 'N': '𐩭', 'O': '𐩮',
+        'P': '𐩯', 'Q': '𐩰', 'R': '𐩱', 'S': '𐩲', 'T': '𐩳',
+        'U': '𐩴', 'V': '𐩵', 'W': '𐩶', 'X': '𐩷', 'Y': '𐩸',
+        'Z': '𐩹'
     };
 
     function convertName() {
-      const input = document.getElementById('nameInput').value.toLowerCase();
-      let output = '';
-      for (let char of input) {
-        output += lihyaniteMap[char] || char;
-      }
-      document.getElementById('output').textContent = output;
+        let inputName = document.getElementById('nameInput').value.toUpperCase();
+        let convertedName = inputName.split('').map(char => lihyanMap[char] || char).join('');
+        document.getElementById('convertedNameContainer').innerText = convertedName;
+        document.getElementById('shareDownloadContainer').style.display = 'block';
     }
-  </script>
+
+    function downloadImage() {
+        const text = document.getElementById('convertedNameContainer').innerText;
+        const link = document.createElement('a');
+        link.download = 'lihyan_name.png';
+        link.href = 'data:image/png;base64,' + btoa(text);
+        link.click();
+    }
+
+    document.getElementById('downloadBtn').addEventListener('click', downloadImage);
+
+    document.getElementById('twitterShareBtn').addEventListener('click', function () {
+        const text = document.getElementById('convertedNameContainer').innerText;
+        window.open(`https://twitter.com/intent/tweet?text=My Lihyanite name: ${encodeURIComponent(text)}`, '_blank');
+    });
+
+    document.getElementById('linkedinShareBtn').addEventListener('click', function () {
+        const text = document.getElementById('convertedNameContainer').innerText;
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(text)}`, '_blank');
+    });
+</script>
+
 </body>
 </html>
 <!-- partial -->
